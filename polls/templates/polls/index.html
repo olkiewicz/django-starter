@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XD page</title>
+</head>
+<body>
+{% if showTemplate %}
+    <ul>
+        <p>Here we go!</p>
+        <p>{{ resultText }}</p>
+        <p>
+            The true is out there.
+            <l>{{ num }}</l>
+        </p>
+
+
+
+        {% for n in numList %}
+<!--            <li><a href="/polls/lotto/{{ n }}/">link do lotto</a> </li>-->
+            {% with digit=-1 %}
+            {% if n|divisibleby:3 %}
+                {% with varXd=n %}
+                <li><a href="{% url 'lotto' n varXd %}">link do lotto</a> </li>
+                {% endwith %}
+            {% else %}
+                {% with varXd=digit|add:n %}
+                <li><a href="{% url 'lotto' n varXd %}">link do lotto</a> </li>
+                {% endwith %}
+            {% endif %}
+            {% endwith %}
+
+<!--        <p>The number is: {{ n }}</p>-->
+        {% endfor %}
+
+    </ul>
+{% endif %}
+</body>
+</html>
